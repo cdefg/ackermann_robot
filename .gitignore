@@ -1,0 +1,10 @@
+.catkin_workspace
+build/
+devel/
+.vscode/c_cpp_properties.json
+.vscode/settings.json
+src/CMakeLists.txt
+src/ackermann_mapping/.vscode/settings.json
+src/ackermann_mapping/.vscode/c_cpp_properties.json
+src/ackermann_localization/.vscode/settings.json
+src/ackermann_localization/.vscode/c_cpp_properties.json

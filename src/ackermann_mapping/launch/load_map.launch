@@ -1,0 +1,6 @@
+<launch>
+
+    <arg name="map_file" default="$(find ackermann_mapping)/maps/map0.yaml"/>
+    <node pkg="map_server" type="map_server" name="map_server" args="$(arg map_file)" />
+
+</launch>
