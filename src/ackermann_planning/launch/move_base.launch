@@ -1,0 +1,40 @@
+<launch>
+    <!-- load gazebo simulation-->
+    <include file="$(find ackermann_simu)/launch/ackermann.launch"/>
+
+    <!-- load map -->
+    <include file="$(find ackermann_mapping)/launch/load_map.launch"/>
+
+    <!-- localize robot -->
+    <include file="$(find ackermann_localization)/launch/amcl.launch"/>
+
+    <!-- Arguments -->
+    <arg name="cmd_vel_topic" default="/cmd_vel" />
+    <arg name="odom_topic" default="/odom" />
+
+    <!-- move_base_flex -->
+    <node pkg="mbf_costmap_nav" type="mbf_costmap_nav" respawn="false" name="move_base_flex" output="screen">
+        <param name="SBPLLatticePlanner/primitive_filename" value="$(find ackermann_planning)/config/ackermann.mprim" />
+        <rosparam file="$(find ackermann_planning)/config/costmap_ackermann_params.yaml" command="load" />
+        <rosparam file="$(find ackermann_planning)/config/mbf_sbpl.yaml" command="load" />
+        <rosparam file="$(find ackermann_planning)/config/sbpl_global_params.yaml" command="load" />
+        <rosparam file="$(find ackermann_planning)/config/recovery_behavior_params.yaml" command="load" />
+        <rosparam file="$(find ackermann_planning)/config/teb_ackermann.yaml" command="load" />
+        <rosparam file="$(find ackermann_planning)/config/costmap_converter_params.yaml" command="load" />
+        <remap from="cmd_vel" to="$(arg cmd_vel_topic)"/>
+        <remap from="odom" to="$(arg odom_topic)"/>
+    </node>
+
+    <!-- action goal bridge -->
+    <node pkg="ackermann_planning" type="mbf_bridge" respawn="false" name="mbf_bridge" />
+
+    <!-- state machine -->
+    <!-- <param name="/root_path" value="$(find _slam)" type="string"/> -->
+    <node pkg="ackermann_planning" type="state_machine" respawn="false" name="state_machine" output="screen"/>
+
+    <!-- coverage_path_planner -->
+    <include file="$(find coverage_path_planner)/launch/path_planning.launch" />
+
+
+
+</launch>
