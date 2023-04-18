@@ -35,6 +35,9 @@
     <!-- coverage_path_planner -->
     <include file="$(find coverage_path_planner)/launch/path_planning.launch" />
 
+    <!-- rviz -->
+    <node pkg="rviz" type="rviz" name="rviz" args="-d $(find ackermann_planning)/rviz/ackermann_planning_sbpl_teb.rviz"/>
+
 
 
 </launch>
