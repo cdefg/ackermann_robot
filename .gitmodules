@@ -1,0 +1,9 @@
+[submodule "src/ackermann_simu"]
+	path = src/ackermann_simu
+	url = https://github.com/cdefg/ackermann_simu.git
+[submodule "src/navigation-xju-noetic"]
+	path = src/navigation-xju-noetic
+	url = https://github.com/cdefg/navigation-xju-noetic.git
+[submodule "src/navigation_experimental"]
+	path = src/navigation_experimental
+	url = https://github.com/ros-planning/navigation_experimental.git
